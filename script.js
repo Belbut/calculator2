@@ -1,20 +1,3 @@
-/* let add = (a, b) => a + b,
-    subtract = (a, b) => a - b,
-    multiply = (a, b) => a * b,
-    divide = (a, b) => a / b;
-
-let methods = {
-    "+": (a,b)=>add(a,b),
-    "-": (a,b)=>subtract(a,b),
-    "x": (a,b)=>multiply(a,b),
-    "/": (a,b)=>divide(a,b)
-
-}
-
-function calculate(a, operator, b) {
-
-} */
-
 function Calculator(firstVariable = 0) {
     this.variables = [firstVariable];
 
