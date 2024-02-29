@@ -15,8 +15,8 @@ function calculate(a, operator, b) {
 
 } */
 
-function Calculator() {
-    this.variables = [];
+function Calculator(firstVariable = 0) {
+    this.variables = [firstVariable];
 
     const methods = {
         "+": (a, b) => a + b,
