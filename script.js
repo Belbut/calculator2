@@ -74,11 +74,6 @@ function Calculator(firstVariable = "0") {
         if (newCalculationArr.length > 1) return this.operate(newCalculationArr);
     }
 }
-
-let calculator = new Calculator()
-const buttons = document.querySelectorAll("button")
-buttons.forEach((btn) => btn.addEventListener("click", (btnEvent) => numberInjection(btnEvent.target.textContent || btnEvent.target.innerText, calculator)))
-
 let numberInjection = function (str, CalculatorObj) {
     switch (str) {
         case "1":
@@ -123,5 +118,18 @@ let numberInjection = function (str, CalculatorObj) {
             break;
     }
     console.log(CalculatorObj.variables)
-
 }
+
+function updateAllHtml(CalculatorObj) {
+    const functionOutput = document.querySelector(".function")
+
+    functionOutput.textContent = CalculatorObj.variables.join("");
+}
+
+let calculator = new Calculator()
+updateAllHtml(calculator)
+const buttons = document.querySelectorAll("button")
+buttons.forEach((btn) => btn.addEventListener("click", (btnEvent) =>{
+     numberInjection(btnEvent.target.textContent || btnEvent.target.innerText, calculator)
+     updateAllHtml(calculator)
+}))

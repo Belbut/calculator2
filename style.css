@@ -59,18 +59,16 @@ main {
     padding: 5px;
 }
 
-.output .function,
-.output .result{
-    height: 50%;
-}
+
 
 .function{
-    text-align: start;
+    text-align: center;
+    height: 100%;
+    font-size: 20px;
+    word-wrap: break-word;
+    overflow:hidden ;
 }
 
-.result{
-    text-align: end;
-}
 
 .input {
     margin: 20px;
