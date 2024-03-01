@@ -1,4 +1,4 @@
-function Calculator(firstVariable = 0) {
+function Calculator(firstVariable = "0") {
     this.variables = [firstVariable];
 
     let result;
@@ -24,13 +24,23 @@ function Calculator(firstVariable = 0) {
 
     }
 
-    this.eraseInput= function(){
+    this.addCommaInput = function () {
         let lastVariable = this.variables[this.variables.length - 1];
-        if(lastVariable ==null) return;
 
-        if(lastVariable.length>1){
-            this.variables[this.variables.length - 1]= lastVariable.slice(0,-1);
-        }else{
+        if (isNaN(lastVariable)) {//last variable is a operator
+            this.variables.push(".")
+        } else if (!lastVariable.includes(".")) {
+            this.variables[this.variables.length - 1] = lastVariable + "."
+        }
+    }
+
+    this.eraseInput = function () {
+        let lastVariable = this.variables[this.variables.length - 1];
+        if (lastVariable == null) return;
+
+        if (lastVariable.length > 1) {
+            this.variables[this.variables.length - 1] = lastVariable.slice(0, -1);
+        } else {
             this.variables.pop()
         }
     }
@@ -56,18 +66,16 @@ function Calculator(firstVariable = 0) {
         let number2 = +calculationArr[2];
 
 
-        let result = methods[operator](number1, number2)
+        let result = methods[operator](number1, number2).toString()
 
         let newCalculationArr = calculationArr;
         newCalculationArr.splice(0, 3, result)
 
         if (newCalculationArr.length > 1) return this.operate(newCalculationArr);
-
-        return result;
     }
 }
 
-let calculator = new Calculator(0)
+let calculator = new Calculator()
 const buttons = document.querySelectorAll("button")
 buttons.forEach((btn) => btn.addEventListener("click", (btnEvent) => numberInjection(btnEvent.target.textContent || btnEvent.target.innerText, calculator)))
 
@@ -84,7 +92,6 @@ let numberInjection = function (str, CalculatorObj) {
         case "9":
         case "0":
             CalculatorObj.addNumberInput(str)
-
             break;
 
         case "C":
@@ -103,10 +110,11 @@ let numberInjection = function (str, CalculatorObj) {
             break;
 
         case ",":
+            CalculatorObj.addCommaInput()
             break;
 
         case "=":
-            console.log(CalculatorObj.operate())
+            CalculatorObj.operate()
             break;
 
 
