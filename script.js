@@ -82,7 +82,7 @@ let numberInjection = function (str, CalculatorObj) {
         case "x":
             CalculatorObj.addOperatorInput(str)
             break;
-            
+
         default:
             break;
     }
