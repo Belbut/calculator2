@@ -24,9 +24,6 @@ function Calculator(firstVariable = 0) {
 
     }
 
-
-
-
     const methods = {
         "+": (a, b) => a + b,
         "-": (a, b) => a - b,
@@ -36,15 +33,22 @@ function Calculator(firstVariable = 0) {
             return a / b
         }
     }
+    
+    this.operate = function () {
+        if(isNaN(this.variables.at(-1))) this.variables.pop();
+        if(this.variables.length==1) return this.variables[0];
 
-    this.operate = function (calculationArr) {
+        let calculationArr = this.variables
+        console.log(calculationArr)
         let number1 = +calculationArr[0];
         let operator = calculationArr[1];
         let number2 = +calculationArr[2];
 
-        let result = this.methods[operator](number1, number2)
+        
+        let result = methods[operator](number1, number2)
 
-        let newCalculationArr = calculationArr.toSpliced(0, 3, result)
+        let newCalculationArr = calculationArr;
+        newCalculationArr.splice(0, 3, result)
 
         if (newCalculationArr.length > 1) return this.operate(newCalculationArr);
 
@@ -83,7 +87,16 @@ let numberInjection = function (str, CalculatorObj) {
             CalculatorObj.addOperatorInput(str)
             break;
 
+        case "←":
+            break;
+
+        case "=":
+            console.log(CalculatorObj.operate())
+            break;
+
+
         default:
+            console.log("You shouldn't mess with the calculator html it will break stuff")
             break;
     }
     console.log(CalculatorObj.variables)
