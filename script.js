@@ -74,7 +74,7 @@ function Calculator(firstVariable = "0") {
         if (newCalculationArr.length > 1) return this.operate(newCalculationArr);
     }
 }
-let numberInjection = function (str, CalculatorObj) {
+let buttonClickInjection = function (str, CalculatorObj) {
     switch (str) {
         case "1":
         case "2":
@@ -90,6 +90,9 @@ let numberInjection = function (str, CalculatorObj) {
             break;
 
         case "C":
+        case "c":
+        case "Delete":
+
             calculator = new Calculator();
             break;
 
@@ -101,14 +104,18 @@ let numberInjection = function (str, CalculatorObj) {
             break;
 
         case "←":
+        case "Backspace":
             CalculatorObj.eraseInput()
             break;
 
+
         case ",":
+        case ".":
             CalculatorObj.addCommaInput()
             break;
 
         case "=":
+        case "Enter":
             CalculatorObj.operate()
             break;
 
@@ -129,7 +136,12 @@ function updateAllHtml(CalculatorObj) {
 let calculator = new Calculator()
 updateAllHtml(calculator)
 const buttons = document.querySelectorAll("button")
-buttons.forEach((btn) => btn.addEventListener("click", (btnEvent) =>{
-     numberInjection(btnEvent.target.textContent || btnEvent.target.innerText, calculator)
-     updateAllHtml(calculator)
+buttons.forEach((btn) => btn.addEventListener("click", (btnEvent) => {
+    buttonClickInjection(btnEvent.target.textContent || btnEvent.target.innerText, calculator)
+    updateAllHtml(calculator)
 }))
+
+document.addEventListener("keydown", (e) => {
+    buttonClickInjection(e.key, calculator)
+    updateAllHtml(calculator)
+});
