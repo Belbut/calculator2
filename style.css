@@ -53,10 +53,23 @@ main {
     margin-top: 25px;
     border-radius: 5px;
     border: 1px solid black;
-    padding: 1px 6px;
     border-width: 2px;
     border-style: outset;
     border-image: initial;
+    padding: 5px;
+}
+
+.output .function,
+.output .result{
+    height: 50%;
+}
+
+.function{
+    text-align: start;
+}
+
+.result{
+    text-align: end;
 }
 
 .input {
